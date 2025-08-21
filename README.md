@@ -9,8 +9,8 @@
 ├─ retry_blank.py     # 补漏脚本：只针对空 answer 重新请求 Qwen
 ├─ fix.py             # 编码修复：强制 UTF-8 无 BOM，解决平台提交编码报错
 ├─ test.csv           # 官方测试集（id,image,question）
-├─ output.csv         # 最终提交文件（id,answer）
 └─ image/             # 484 张 png 原图
+其他的都是无关文件可以不看
 ```
 
 ### 2. 环境要求
@@ -55,6 +55,7 @@ python retry_blank.py
 #### `qwen.py`
 - 逐行读取 `test.csv` → 图片转 base64 → 调用 Qwen → 写 `output.csv`
 - 已内置重试 3 次、sleep 1s、失败置空
+- 实验发现部分图片响应缓慢，应该延长
 
 #### `retry_blank.py`
 - 读取 `output.csv`，找出空 answer 对应的 id
